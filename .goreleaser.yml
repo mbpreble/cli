@@ -35,6 +35,7 @@ builds:
         - cmd: ./script/sign-windows-executable.sh {{ .Path }}
           env:
             - GITHUB_CERT_PASSWORD={{ .Env.GITHUB_CERT_PASSWORD }}
+            - DESKTOP_CERT_TOKEN={{ .Env.DESKTOP_CERT_TOKEN }}
 
 archives:
   - id: nix
