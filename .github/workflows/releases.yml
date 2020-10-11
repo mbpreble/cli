@@ -15,6 +15,8 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.15
+      - name: Install opennssl
+        run: sudo apt-get install openssl
       - name: Generate changelog
         run: |
           echo ::set-env name=GORELEASER_CURRENT_TAG::${GITHUB_REF#refs/tags/}
