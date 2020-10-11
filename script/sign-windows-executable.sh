@@ -8,15 +8,18 @@ CERTIFICATE_PATH="testCertificate.pfx"
 
 PROGRAM_NAME="GitHub CLI"
 
-# Probably need a password for one of these...
-openssl pkcs12 -in ${CERTIFICATE_PATH} -nocerts -nodes -out key.pem  --password pass:${GITHUB_CERT_PASSWORD}
-openssl rsa -in key.pem -outform PVK -pvk-strong -out pvk.pvk
-openssl pkcs12 -in ${CERTIFICATE_PATH} -nokeys -nodes -out cert.pem
-openssl crl2pkcs7 -nocrl -certfile cert.pem -outform DER -out spc.spc
+# Convert private key to the expected format
+openssl pkcs12 -in ${CERTIFICATE_PATH} -nocerts -nodes -out private-key.pem  -passin pass:${GITHUB_CERT_PASSWORD}
+openssl rsa -in private-key.pem -outform PVK -pvk-none -out private-key.pvk
+
+# Convert certificate chain into the expected format
+openssl pkcs12 -in ${CERTIFICATE_PATH} -nokeys -nodes -out certificate.pem -passin pass:${GITHUB_CERT_PASSWORD}
+openssl crl2pkcs7 -nocrl -certfile certificate.pem -outform DER -out certificate.spc
 
 signcode \
-  -spc spc.spc
-  -v pvk.pvk
-  -n ${"PROGRAM_NAME"}
-  -t http://timestamp.digicert.com
-  -a sha256
+  -spc certificate.spc \
+  -v private-key.pvk \
+  -n $PROGRAM_NAME \
+  -t http://timestamp.digicert.com \
+  -a sha256 \
+$EXECUTABLE_PATH
