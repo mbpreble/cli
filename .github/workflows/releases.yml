@@ -26,7 +26,7 @@ jobs:
           version: latest
           args: release --release-notes=CHANGELOG.md
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CERT_PASSWORD: ${{ secrets.CERT_PASSWORD }} # TODO should change back to GITHUB_CERT_PASSWORD
           DESKTOP_CERT_TOKEN: ${{ secrets.GITHUB_TOKEN }} # TODO should change back to DESKTOP_CERT_TOKEN
 

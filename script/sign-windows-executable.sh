@@ -8,7 +8,7 @@ curl \
   -H "Accept: application/vnd.github.v3.raw" \
   --output windows-certificate.pfx \
   --verbose \
-  https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx # TODO - this path needs to change
+  https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx?ref=sign-windows-executables # TODO - this path needs to change
 
 PROGRAM_NAME="GitHub CLI"
 
