@@ -6,7 +6,6 @@ PATH=$1
 # Assume we... did something to get the cert downloaded
 CERTIFICATE_PATH="testCertificate.pfx"
 
-PASSWORD=${"GITHUB_CERT_PASSWORD"}
 PROGRAM_NAME="GitHub CLI"
 
 # Probably need a password for one of these...
