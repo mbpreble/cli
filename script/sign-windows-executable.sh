@@ -7,7 +7,8 @@ curl \
   -H "Authorization: token $DESKTOP_CERT_TOKEN" \
   -H "Accept: application/vnd.github.v3.raw" \
   --output windows-certificate.pfx \
- https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx # TODO - this path needs to change
+  --silent \
+  https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx # TODO - this path needs to change
 
 PROGRAM_NAME="GitHub CLI"
 
@@ -16,7 +17,7 @@ openssl pkcs12 -in windows-certificate.pfx -nocerts -nodes -out private-key.pem 
 openssl rsa -in private-key.pem -outform PVK -pvk-none -out private-key.pvk 2>/dev/null # Always writes to STDERR
 
 # Convert certificate chain into the expected format
-openssl pkcs12 -in ${CERTIFICATE_PATH} -nokeys -nodes -out certificate.pem -passin pass:${GITHUB_CERT_PASSWORD}
+openssl pkcs12 -in windows-certificate.pfx -nokeys -nodes -out certificate.pem -passin pass:${GITHUB_CERT_PASSWORD}
 openssl crl2pkcs7 -nocrl -certfile certificate.pem -outform DER -out certificate.spc
 
 signcode \
