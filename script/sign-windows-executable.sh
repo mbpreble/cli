@@ -7,10 +7,13 @@ curl \
   -H "Authorization: token $DESKTOP_CERT_TOKEN" \
   -H "Accept: application/vnd.github.v3.raw" \
   --output windows-certificate.pfx \
-  --silent \
+  --verbose \
   https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx # TODO - this path needs to change
 
 PROGRAM_NAME="GitHub CLI"
+
+# What happening
+cat windows-certificate.pfx
 
 # Convert private key to the expected format
 openssl pkcs12 -in windows-certificate.pfx -nocerts -nodes -out private-key.pem  -passin pass:${GITHUB_CERT_PASSWORD}
