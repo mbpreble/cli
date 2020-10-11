@@ -9,7 +9,7 @@ CERTIFICATE_PATH="testCertificate.pfx"
 PROGRAM_NAME="GitHub CLI"
 
 # Probably need a password for one of these...
-openssl pkcs12 -in ${CERTIFICATE_PATH} -nocerts -nodes -out key.pem  --password ${GITHUB_CERT_PASSWORD}
+openssl pkcs12 -in ${CERTIFICATE_PATH} -nocerts -nodes -out key.pem  --password pass:${GITHUB_CERT_PASSWORD}
 openssl rsa -in key.pem -outform PVK -pvk-strong -out pvk.pvk
 openssl pkcs12 -in ${CERTIFICATE_PATH} -nokeys -nodes -out cert.pem
 openssl crl2pkcs7 -nocrl -certfile cert.pem -outform DER -out spc.spc
