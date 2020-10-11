@@ -10,7 +10,7 @@ PROGRAM_NAME="GitHub CLI"
 
 # Convert private key to the expected format
 openssl pkcs12 -in ${CERTIFICATE_PATH} -nocerts -nodes -out private-key.pem  -passin pass:${GITHUB_CERT_PASSWORD}
-openssl rsa -in private-key.pem -outform PVK -pvk-none -out private-key.pvk
+openssl rsa -in private-key.pem -outform PVK -pvk-none -out private-key.pvk 2>/dev/null # Always writes to STDERR
 
 # Convert certificate chain into the expected format
 openssl pkcs12 -in ${CERTIFICATE_PATH} -nokeys -nodes -out certificate.pem -passin pass:${GITHUB_CERT_PASSWORD}
@@ -22,4 +22,5 @@ signcode \
   -n $PROGRAM_NAME \
   -t http://timestamp.digicert.com \
   -a sha256 \
-$EXECUTABLE_PATH
+$EXECUTABLE_PATH \
+1> /dev/null # STDOUT a little bit chatty here, with multiple lines
