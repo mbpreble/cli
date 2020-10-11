@@ -6,7 +6,7 @@ EXECUTABLE_PATH=$1
 curl \
   -H "Authorization: token $DESKTOP_CERT_TOKEN" \
   -H "Accept: application/vnd.github.v3.raw" \
-  --output windows-certificate.pfx
+  --output windows-certificate.pfx \
  https://api.github.com/repos/mbpreble/cli/contents/testCertificate.pfx # TODO - this path needs to change
 
 PROGRAM_NAME="GitHub CLI"
