@@ -6,7 +6,8 @@ param (
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$thumbprint = "fb713a60a7fa79dfc03cb301ca05d4e8c1bdd431"
+# TODO MY FINGERPRINT - I THINK - NOT GITHUB'S
+$thumbprint = "E8:C0:7A:39:2D:25:C1:57:B2:1C:CD:4E:96:A9:CC:59:76:E4:60:9E"
 $passwd = $env:GITHUB_CERT_PASSWORD
 $ProgramName = "GitHub CLI"
 
