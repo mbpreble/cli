@@ -1,4 +1,4 @@
-<#$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
+$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 $certFile = "$scriptPath\windows-certificate.pfx"
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
@@ -9,7 +9,4 @@ Invoke-WebRequest 'https://api.github.com/repos/desktop/desktop-secrets/contents
               -Headers $headers `
               -OutFile "$certFile"
 
-Write-Output "::set-output name=cert-file::$certFile"#>
-
-# TODO- Faking this to see if it can be re-used at least
-Write-Output "::set-output name=cert-file::$testCertificate.pfx"
+Write-Output "::set-output name=cert-file::$certFile"
